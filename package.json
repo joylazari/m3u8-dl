@@ -1,7 +1,7 @@
 {
   "name": "m3u8-dl",
   "description": "Download M3U8/HLS streams and merge all the chunks to a MP4 video",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Joy Lazari @joylazari",
   "bin": {
     "m3u8-dl": "./bin/run"
@@ -14,9 +14,7 @@
     "@oclif/plugin-help": "^3",
     "@types/fluent-ffmpeg": "^2.1.16",
     "chalk": "^4.1.0",
-    "clear": "^0.1.0",
     "clui": "^0.3.6",
-    "figlet": "^1.5.0",
     "fluent-ffmpeg": "^2.1.2",
     "inquirer": "^7.3.3",
     "node-notifier": "^9.0.0",
@@ -57,12 +55,15 @@
   "keywords": [
     "oclif"
   ],
-  "license": "MIT",
+  "license": "Apache-2.0",
   "main": "lib/index.js",
   "oclif": {
     "bin": "m3u8-dl"
   },
-  "repository": "joylazari/m3u8-dl",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joylazari/m3u8-dl"
+  },
   "scripts": {
     "posttest": "eslint . --ext .ts --config .eslintrc",
     "prepack": "rm -rf lib && tsc -b && oclif-dev readme",

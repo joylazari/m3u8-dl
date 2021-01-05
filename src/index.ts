@@ -1,20 +1,18 @@
 import {Command, flags} from '@oclif/command'
-import * as figlet from 'figlet';
 import {createHash, Hash} from 'crypto'
 import {readdirSync, writeFileSync} from 'fs';
 import {Choice} from 'prompts';
 import {FFMpegService, FFMpegServiceResponse} from './ffmpeg/FFMpegService';
 import * as chalk from "chalk";
 import {homedir} from 'os';
-import {ShellReturnValue, exec, mkdir, config as shellConfig, rm} from 'shelljs';
-import prompts = require('prompts');
-import clear = require('clear');
+import {config as shellConfig, exec, mkdir, rm, ShellReturnValue} from 'shelljs';
 import {notify} from 'node-notifier'
+import prompts = require('prompts');
 
 shellConfig.silent = true
 
-class StreamDownloader extends Command {
-  static description = 'Download all the .ts chunks from the provided M3U8 playlist file and merge them into an MP4 file'
+class M3U8Downloader extends Command {
+  static description = 'Download all the HLS/.ts chunks from the provided M3U8 playlist file and merge them into an MP4 file'
 
   static flags = {
     ...Command.flags,
@@ -25,17 +23,11 @@ class StreamDownloader extends Command {
   static args = [{name: 'playlist', description: 'M3U8 playlist file or remote URI'}]
 
   async init(): Promise<void> {
-    clear()
-    this.info(
-        figlet.textSync('Stream Downloader', {
-          font: 'Cybermedium',
-          horizontalLayout: 'full',
-        })
-    )
+    this.info('M3U8 Downloader')
   }
 
   async run() {
-    const {args} = this.parse(StreamDownloader)
+    const {args} = this.parse(M3U8Downloader)
 
     let M3U8File: string
     if (args.playlist) {
@@ -74,7 +66,7 @@ class StreamDownloader extends Command {
     rm(`${outputDir}/out.list`)
     this.success('Job done!')
     notify({
-      title: 'Stream downloader',
+      title: 'M3U8-DL',
       message: 'M3U8 Playlist donloaded!'
     })
     this.exit(1)
@@ -178,4 +170,4 @@ class StreamDownloader extends Command {
   }
 }
 
-export = StreamDownloader
+export = M3U8Downloader
